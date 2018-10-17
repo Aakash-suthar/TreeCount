@@ -1,0 +1,86 @@
+﻿<Page x:Class="tree.SearchPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:tree"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="700"
+      Title="SearchPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center" Orientation="Horizontal">
+
+            <TextBox Text="{Binding SearchText}" Height="25" Tag="Enter full path" Width="220" Style="{StaticResource placeHolder}"/>
+        <Button VerticalContentAlignment="Center" 
+                Command="{Binding SearchButton}"
+                BorderThickness="0" Background="Transparent" FontSize="25" Cursor="Hand" Margin="4 1 0 0" Content="&#xf00b;" FontFamily="{StaticResource FontAwesome}"/>
+        </StackPanel>
+        <Grid Margin="0 15 0 0" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="0 0 5 0" Background="LightGreen" Grid.Row="0"
+                        Grid.Column="1">
+                <Label FontSize="20"  HorizontalAlignment="Center" Content="Images"
+                       Style="{StaticResource Basiclabel}"/>
+                <Label HorizontalAlignment="Center" FontSize="45" Content="&#xf1c5;" FontFamily="{StaticResource    FontAwesome}"/>
+                <Label Style="{StaticResource SearchLabel}" Content="{Binding Images}"/>
+            </StackPanel>
+            <StackPanel Margin="0 0 5 0" Background="LightBlue" Grid.Row="0"
+                        Grid.Column="2">
+                <Label FontSize="20"
+                    Style="{StaticResource Basiclabel}"
+                    HorizontalAlignment="Center" Content="Texts"/>
+                <Label HorizontalAlignment="Center" FontSize="45" Content="&#xf1c2;" FontFamily="{StaticResource    FontAwesome}"/>
+                <Label Style="{StaticResource SearchLabel}" Content="{Binding Texts}"/>
+            </StackPanel>
+            <StackPanel Margin="0 0 5 0" Background="LightCoral" Grid.Row="0"
+                        Grid.Column="3">
+                <Label FontSize="20"
+                    Style="{StaticResource Basiclabel}"
+                    HorizontalAlignment="Center" Content="Pdfs"/>
+                <Label HorizontalAlignment="Center" FontSize="45" Content="&#xf1c1;" FontFamily="{StaticResource    FontAwesome}"/>
+                <Label Style="{StaticResource SearchLabel}" Content="{Binding Pdfs}"/>
+            </StackPanel>
+            <StackPanel Margin="0 0 5 0" Background="LightSalmon" Grid.Row="0"
+                        Grid.Column="4">
+                <Label FontSize="20"
+                    Style="{StaticResource Basiclabel}"
+                    HorizontalAlignment="Center" Content="Zips"/>
+                <Label HorizontalAlignment="Center" FontSize="45" Content="&#xf1c6;" FontFamily="{StaticResource    FontAwesome}"/>
+                <Label Style="{StaticResource SearchLabel}" Content="{Binding Zips}"/>
+            </StackPanel>
+            <StackPanel Margin="0 0 5 0" Background="LightSeaGreen" Grid.Row="0"
+                        Grid.Column="5">
+                <Label FontSize="20"
+                    Style="{StaticResource Basiclabel}"
+                    HorizontalAlignment="Center" Content="Others"/>
+                <Label HorizontalAlignment="Center" FontSize="45" Content="&#xf15b;" FontFamily="{StaticResource    FontAwesome}"/>
+                <Label Style="{StaticResource SearchLabel}" Content="{Binding Others}"/>
+            </StackPanel>
+            <StackPanel Margin="0 10 0 0" Grid.Row="1" Grid.ColumnSpan="7">
+                <Label FontSize="20"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Content="{Binding Status}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

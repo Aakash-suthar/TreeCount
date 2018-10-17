@@ -1,0 +1,156 @@
+﻿<Window x:Class="tree.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:tree"
+        mc:Ignorable="d"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        BorderThickness="0 0 0 1"
+        BorderBrush="Black"
+        Margin="{Binding CustomMargin}"
+        Title="MainWindow" Height="470" Width="700" ResizeMode="NoResize"
+        Background="{Binding Background , FallbackValue=WhiteSmoke}">
+    <Window.Resources>
+    </Window.Resources>
+    <Grid>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="21"/>
+            <RowDefinition Height="425"/>
+        </Grid.RowDefinitions>
+        <Canvas
+                Grid.Column="0" 
+                Grid.Row="0" 
+                Panel.ZIndex="1" Grid.RowSpan="2" >
+            <Border BorderBrush="LightBlue" BorderThickness="0 0 0.8 0">
+                <StackPanel Background="WhiteSmoke" Height="469"
+                        Width="0">
+                    <Grid Height="200" Margin="0 50 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Button Grid.Row="0"
+                        Width="90" Margin="5 0 0 0" Command="{Binding SetHome}"
+                        Style="{StaticResource PanelButton}" 
+                            Content="&#xf015;"  Name="Home" />
+                        <Button Margin="5 0 0 0" Grid.Row="1"
+                        Width="90"
+                        Style="{StaticResource PanelButton}" Content="&#xf002;" 
+                        Name="Search" Command="{Binding Search}" />
+                        <Button Margin="6 0 0 0" Grid.Row="2"
+                        Width="90"
+                        Style="{StaticResource PanelButton}" Content="&#xf129;" 
+                        Name="About" Command="{Binding SetAbout}"/>
+                        <Button Grid.Row="3"
+                        Width="90" Margin="5 0 0 0" Command="{Binding Exit}"
+                        Style="{StaticResource PanelButton}" Content="&#xf2d4;" 
+                        Name="Exit"/>
+                    </Grid>
+                    <StackPanel.Style>
+                        <Style TargetType="{x:Type StackPanel}">
+                            <Setter Property="Width" Value="40"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=hello,Path=IsPressed}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <StopStoryboard BeginStoryboardName="second"/>
+                                        <StopStoryboard BeginStoryboardName="third"/>
+                                        <StopStoryboard BeginStoryboardName="fourth"/>
+                                        <BeginStoryboard x:Name="first">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Width" 
+                                      To="120"  Duration="0:0:0.3" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=About,Path=IsPressed}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <StopStoryboard BeginStoryboardName="first"/>
+                                        <StopStoryboard BeginStoryboardName="third"/>
+                                        <StopStoryboard BeginStoryboardName="fourth"/>
+                                        <BeginStoryboard x:Name="second">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Width" 
+                                      To="0"  Duration="0:0:0.3" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=Search,Path=IsPressed}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <StopStoryboard BeginStoryboardName="first"/>
+                                        <StopStoryboard BeginStoryboardName="second"/>
+                                        <StopStoryboard BeginStoryboardName="fourth"/>
+                                        <BeginStoryboard x:Name="third">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Width" 
+                                      To="0"  Duration="0:0:0.3" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=Home,Path=IsPressed}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <StopStoryboard BeginStoryboardName="first"/>
+                                        <StopStoryboard BeginStoryboardName="second"/>
+                                        <StopStoryboard BeginStoryboardName="third"/>
+                                        <BeginStoryboard x:Name="fourth">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Width" 
+                                      To="0"  Duration="0:0:0.3" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                </StackPanel>
+            </Border>
+        </Canvas>
+        <Grid Background="AliceBlue" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="0.8*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="hello"
+                Grid.Column="0" Margin="5 2 0 0" 
+                Height="30" Width="33" Style="{StaticResource TopButton}"/>
+            <Viewbox Stretch="Uniform" Grid.Column="1">
+                <ContentPresenter Content="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Viewbox>
+            <Grid Grid.Column="2" HorizontalAlignment="Right" Height="20" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                    Style="{StaticResource ControlButton}"
+                    Content="--" 
+                    Command="{Binding Mini}"/>
+                <Button Grid.Column="2" Content="X" 
+                    Style="{StaticResource ControlButton}"
+                    Command="{Binding Close}"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2"  Grid.Column="1">
+            <Frame Content="{Binding Application,Converter={local:PageConverter}}" NavigationUIVisibility="Hidden"/>
+        </Grid>
+    </Grid>
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            
+            CaptionHeight="35"/>
+    </WindowChrome.WindowChrome>
+</Window>
